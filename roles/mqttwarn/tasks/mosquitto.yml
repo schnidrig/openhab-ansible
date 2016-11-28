@@ -1,0 +1,16 @@
+---
+
+- name: install main packages
+  apt: 
+    pkg: "{{item}}"
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
+  with_items:
+     - mosquitto
+     - mosquitto-clients
+  tags:
+     - packages
+     - mosquitto
+
+
+

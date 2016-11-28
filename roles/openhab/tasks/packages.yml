@@ -1,0 +1,38 @@
+---
+
+- name: install main packages
+  apt: 
+    pkg: "{{item}}"
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
+  with_items:
+     - "{{jdk}}"
+     - openhab-runtime
+  tags:
+     - packages
+     - openhab
+
+- name: install bindings
+  apt: 
+    pkg: "openhab-addon-binding-{{item}}"
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
+  with_items: "{{bindings}}"
+  tags:
+     - packages
+     - bindings
+     - openhab
+
+- name: install persistence add ons
+  apt: 
+    pkg: "openhab-addon-persistence-{{item}}"
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
+  with_items: "{{persistence}}"
+  tags:
+     - packages
+     - persistence
+     - openhab
+
+
+

@@ -1,0 +1,18 @@
+---
+
+- name: install ppa key
+  apt_key: url=https://bintray.com/user/downloadSubjectPublicKey?username=openhab state=present
+  tags:
+     - repo
+     - openhab
+
+- name: install openhab repo
+  apt_repository:
+    repo='deb http://dl.bintray.com/openhab/apt-repo stable main'
+    state=present
+    update_cache=yes
+    filename=openhab
+  tags:
+     - repo
+     - openhab
+

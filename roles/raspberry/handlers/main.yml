@@ -1,0 +1,9 @@
+---
+
+- name: restart ntp
+  service: name=ntp state=restarted
+
+- name: update exportfs
+  shell: exportfs -rav
+
+

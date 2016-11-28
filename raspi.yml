@@ -1,0 +1,10 @@
+---
+
+- hosts: controller
+  become: true
+  roles:
+    - raspberry
+    - mqttwarn
+    - openhab
+
+

@@ -1,0 +1,56 @@
+---
+
+- pip: 
+    name: "paho-mqtt"
+  tags:
+    - mqttwarn
+
+
+- git: 
+    repo: "https://github.com/jpmens/mqttwarn.git"
+    dest: "/opt/mqttwarn"
+    version: "0c030a94a7e3590ea3485f460be555cee027d8a8"
+  tags:
+    - mqttwarn
+
+- name: install config file
+  template:
+     src: mqttwarn.ini
+     dest: "/opt/mqttwarn/mqttwarn.ini"
+     owner: root
+     group: root
+     mode: "u=rw,g=r,o=r"
+  notify: restart mqttwarn
+  tags:
+    - mqttwarn
+    - mqttwarnconfig
+
+- name: create log file
+  file: 
+     state: touch
+     path: "/opt/mqttwarn/mqttwarn.log"
+     owner: pi
+     group: pi
+  tags:
+    - mqttwarn
+
+- name: install service file
+  template:
+     src: mqttwarn.service
+     dest: "/etc/systemd/system/mqttwarn.service"
+     owner: root
+     group: root
+     mode: "u=rw,g=r,o=r"
+  tags:
+    - mqttwarn
+
+- name: "configure systemd"
+  systemd:
+    name: mqttwarn
+    daemon_reload: yes
+    enabled: true
+    state: started 
+  tags:
+    - mqttwarn
+
+

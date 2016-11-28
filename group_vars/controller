@@ -1,0 +1,17 @@
+---
+
+bindings:
+    - astro
+    - ntp
+    - rfxcom
+    - weather
+    - mqtt
+
+persistence:
+    - mqtt
+
+graphite_server: "{{vault_graphite_server}}"
+
+
+
+

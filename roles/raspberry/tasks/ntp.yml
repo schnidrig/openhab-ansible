@@ -1,0 +1,28 @@
+---
+
+- name: update ntp.conf
+  lineinfile:
+    dest=/etc/ntp.conf
+    regexp="^server\s+.*debian.pool.ntp.org.*"
+    insertafter="^server\s.*"
+    state=absent
+  notify: restart ntp
+  tags:
+    - ntp
+    - ntpconfig
+
+- name: update ntp.conf
+  lineinfile:
+    dest=/etc/ntp.conf
+    insertafter="# pool:"
+    line="server {{item}} iburst"
+  with_items: "{{ntp}}"
+  notify: restart ntp
+  tags:
+    - ntp
+    - ntpconfig
+
+- name: Start the ntp service
+  service: name=ntp state=started enabled=true
+  tags: ntp
+

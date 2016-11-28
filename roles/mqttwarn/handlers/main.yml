@@ -1,0 +1,5 @@
+---
+
+- name: restart mqttwarn
+  service: name=mqttwarn state=restarted
+

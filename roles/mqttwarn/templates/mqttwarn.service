@@ -1,0 +1,13 @@
+[Unit]
+Description=MQTTwarn
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/opt/mqttwarn
+ExecStart=/opt/mqttwarn/mqttwarn.py
+
+[Install]
+WantedBy=default.target
+

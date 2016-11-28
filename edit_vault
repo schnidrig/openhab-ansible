@@ -1,0 +1,1 @@
+ansible-vault --vault-password-file=vault_password edit group_vars/all/vault

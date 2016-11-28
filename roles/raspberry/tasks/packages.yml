@@ -1,0 +1,16 @@
+---
+
+- name: ensure packages are installed
+  apt: 
+    pkg: "{{item}}"
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
+  with_items:
+     - apt-transport-https
+     - ntp
+     - tmux
+     - python-pip
+     - git
+  tags:
+     - packages
+

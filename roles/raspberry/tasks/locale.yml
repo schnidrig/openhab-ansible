@@ -1,0 +1,28 @@
+---
+
+
+- name: setup /etc/locale.gen
+  lineinfile: 
+     dest: "/etc/locale.gen"
+     regexp: '\s*#\s*({{locale}}.*)'
+     line: '\1'
+     backrefs: yes
+  tags:
+    - locale
+
+
+- name: generate locale
+  locale_gen: name="{{locale}}" state=present
+  tags:
+    - locale
+
+- name: set environment file
+  template:
+     src: environment
+     dest: "/etc/environment"
+     owner: root
+     group: root
+     mode: "u=rw,g=r,o=r"
+  tags:
+    - locale
+

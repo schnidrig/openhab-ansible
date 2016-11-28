@@ -1,0 +1,22 @@
+---
+
+- name: fix /etc/localtime
+  file: 
+     state: link
+     path: "/etc/localtime"
+     src: "/usr/share/zoneinfo/{{timezone}}"
+     owner: root
+     group: root
+     force: true
+  tags:
+    - timezone
+
+- name: fix /etc/timezone
+  copy:
+     dest: "/etc/timezone"
+     content: "{{timezone}}"
+     owner: root
+     group: root
+     mode: "u=rw,g=r,o=r"
+  tags:
+    - timezone

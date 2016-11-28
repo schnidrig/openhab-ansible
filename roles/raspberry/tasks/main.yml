@@ -1,0 +1,9 @@
+---
+
+- include: packages.yml
+- include: ntp.yml
+- include: timezone.yml
+- include: locale.yml
+
+
+

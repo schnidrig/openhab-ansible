@@ -1,0 +1,8 @@
+---
+
+- include: repo.yml
+- include: packages.yml
+- include: openhab.yml
+- include: nfs.yml
+
+

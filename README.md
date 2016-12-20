@@ -15,7 +15,10 @@ e.g on a mac with sdcard reader that would be:
 
 Insert sdcard into rasberry pi and boot.
 
+### Enable sshd
 
+    sudo systemctl enable ssh
+    
 ### Configure fixed ip address
 
 Edit the file `/etc/dhcpcd.conf` and add the following lines (according to your network) and reboot.
@@ -38,5 +41,12 @@ Check/change other values in group_vars
 
 ansible-playbook -i inventory raspi.yml
 
+## performance tweaks
+
+https://github.com/openhab/openhab/wiki/Hardware-FAQ
+
+# install docker
+https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
+curl -sSL https://get.docker.com | sh
 
 

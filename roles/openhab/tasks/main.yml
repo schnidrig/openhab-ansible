@@ -3,6 +3,8 @@
 - include: repo.yml
 - include: packages.yml
 - include: openhab.yml
+- include: habmin.yml
 - include: nfs.yml
+- include: mysql.yml
 
 

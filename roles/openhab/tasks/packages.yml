@@ -8,6 +8,7 @@
   with_items:
      - "{{jdk}}"
      - openhab-runtime
+     - sysstat
   tags:
      - packages
      - openhab

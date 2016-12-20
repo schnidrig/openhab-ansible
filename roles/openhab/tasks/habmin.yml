@@ -1,0 +1,32 @@
+---
+
+
+- name: download HABmin
+  get_url:
+    url: https://github.com/cdjackson/HABmin/archive/master.zip
+    dest: /root/habmin_master.zip
+    mode: 0444
+  tags:
+    - habmin
+
+
+- name: unzip
+  unarchive:
+    remote_src: yes
+    src: /root/habmin_master.zip
+    dest: /usr/share/openhab/webapps/
+    creates: "/usr/share/openhab/webapps/habmin"
+  tags:
+    - habmin
+
+- name: rename
+  command: creates="/usr/share/openhab/webapps/habmin" mv "/usr/share/openhab/webapps/HABmin-master" "/usr/share/openhab/webapps/habmin"
+  tags:
+    - habmin
+
+- name: install addon
+  command: creates="/usr/share/openhab/addons/org.openhab.io.habmin-1.8.0.jar" mv "/usr/share/openhab/webapps/habmin/addons/org.openhab.io.habmin-1.7.0-SNAPSHOT.jar" "/usr/share/openhab/addons/org.openhab.io.habmin-1.8.0.jar"
+  tags:
+    - habmin
+
+

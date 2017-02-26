@@ -8,7 +8,7 @@ apt_config:
   cache_valid_time: 7200
 
 jdk:
-    - oracle-java7-jdk
+    - oracle-java8-jdk
     #- oracle-java7-installer
     #- oracle-java7-set-default
 
@@ -20,5 +20,5 @@ ntp:
     #- "3.ch.pool.ntp.org"
     
 
-
+letsencrypt_email: "{{vault_letsencrypt_email}}"
 

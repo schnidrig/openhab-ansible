@@ -11,6 +11,7 @@
      - tmux
      - python-pip
      - git
+     - multitail
   tags:
      - packages
 

@@ -2,9 +2,10 @@
 
 - hosts: controller
   become: true
+  gather_facts: no
   roles:
     - raspberry
     - mqttwarn
-    - openhab
+    - openhab2
 
 

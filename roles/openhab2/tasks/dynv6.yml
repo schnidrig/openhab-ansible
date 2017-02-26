@@ -1,0 +1,11 @@
+---
+
+- name: install dynv6 update script
+  template:
+     src: dynv6.sh.j2
+     dest: "/root/dynv6.sh"
+     owner: root
+     group: root
+     mode: "u=rwx,g=r,o=r"
+  tags:
+    - dynv6

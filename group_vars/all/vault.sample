@@ -5,6 +5,14 @@
 #vault_graphite_server: 
 #vault_openhab_config_repo:
 
+#vault_nginx_user: user
+#vault_nginx_password: passwd
 
+#vault_dynv6_name: "myhost.dynv6.net"
+#vault_dynv6_device: ""
+#vault_dynv6_token: 'mytoken'
+
+#vault_letsencrypt_email: myname@domain.com
+#vault_fqdn: "example.com"
 
 

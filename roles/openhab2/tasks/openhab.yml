@@ -1,0 +1,20 @@
+---
+
+- name:
+  user: 
+    name: openhab
+    groups: "dialout"
+    append: yes
+  tags:
+    - openhab2
+    - user
+
+- name: "configure systemd"
+  systemd:
+    name: openhab2
+    daemon_reload: yes
+    enabled: true
+    state: started 
+  tags:
+    - openhab2
+

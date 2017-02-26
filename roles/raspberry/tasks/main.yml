@@ -4,6 +4,8 @@
 - include: ntp.yml
 - include: timezone.yml
 - include: locale.yml
+- include: skeleton.yml
+
 
 
 

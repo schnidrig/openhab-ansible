@@ -1,0 +1,30 @@
+server {
+    listen                          80;
+    listen                          [::]:443 ssl;
+    server_name                     {{fqdn}};
+
+    ssl_certificate                 /etc/letsencrypt/live/schnidrig.dynv6.net/fullchain.pem;
+    ssl_certificate_key             /etc/letsencrypt/live/schnidrig.dynv6.net/privkey.pem;
+    ssl_protocols                   TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers                     EECDH+AESGCM:EDH+AESGCM:EECDH:EDH:!MD5:!RC4:!LOW:!MEDIUM:!CAMELLIA:!ECDSA:!DES:!DSS:!3DES:!NULL;
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam                     /etc/nginx/ssl/dhparam2048.pem;
+    ssl_ecdh_curve secp384r1;
+    # check settings with: https://www.ssllabs.com/ssltest/analyze.html?d={{fqdn}}
+
+    location / {
+        proxy_pass                              http://localhost:8080/;
+        proxy_buffering                         off;  # openHAB supports non-buffering specifically for SSEs now
+        proxy_set_header Host                   $http_host;
+        proxy_set_header X-Real-IP              $remote_addr;
+        proxy_set_header X-Forwarded-For        $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto      $scheme;
+
+        auth_basic                              "Openhab";
+        auth_basic_user_file                    /etc/nginx/htpasswd;
+     }
+    location /.well-known/acme-challenge/ {
+        root                                    /var/www/html;
+    }
+
+}

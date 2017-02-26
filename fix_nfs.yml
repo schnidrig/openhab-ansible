@@ -1,8 +1,8 @@
 ---
 
-- hosts: controller
+- hosts: raspis
   become: true
   tasks:
     - service: name=rpcbind state=restarted
     - service: name=nfs-kernel-server state=restarted
-    - shell: chmod -R ugo+w /etc/openhab
+    - shell: chmod -R ugo+w /etc/openhab*

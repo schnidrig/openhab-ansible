@@ -1,0 +1,27 @@
+---
+
+- name: download certbot
+  get_url:
+    url: https://dl.eff.org/certbot-auto
+    dest: /root/certbot-auto
+    mode: 0540
+  tags: 
+    - letsencrypt
+
+- name: get certificate
+  #shell: '/root/certbot-auto -n run --test-cert --nginx --agree-tos --email {{letsencrypt_email}} --cert-path /etc/nginx/ssl/cert.pem --key-path /etc/nginx/ssl/cert.key --fullchain-path /etc/nginx/ssl/chain.pem -d {{fqdn}}'
+  shell: '/root/certbot-auto -n run --nginx --agree-tos --email {{letsencrypt_email}} -d {{fqdn}}'
+  tags: 
+    - letsencrypt
+
+
+- name: cron job
+  cron: 
+    name: "get new certificate"
+    minute: "0"
+    hour: "5"
+    day: "11"
+    job: '/root/certbot-auto -n certonly --nginx --agree-tos --email {{letsencrypt_email}} -d {{fqdn}}'
+  tags: 
+    - letsencrypt
+

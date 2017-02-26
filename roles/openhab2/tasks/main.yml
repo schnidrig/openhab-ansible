@@ -1,0 +1,15 @@
+---
+
+- include: repo.yml
+- include: packages.yml
+- include: openhab.yml
+#- include: habmin.yml
+- include: nfs.yml
+- include: mysql.yml
+- include: backup.yml
+- include: nginx.yml
+- include: dynv6.yml
+- include: letsencrypt.yml
+
+
+

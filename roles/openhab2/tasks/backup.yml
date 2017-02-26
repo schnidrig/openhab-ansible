@@ -1,0 +1,11 @@
+---
+
+- name: create backup script
+  template:
+     src: backup.sh.j2
+     dest: "/root/backup"
+     owner: root
+     group: root
+     mode: "u=rwx,g=r,o=r"
+  tags:
+    - backup

@@ -1,17 +1,24 @@
 ---
 
-bindings:
-    - astro
-    - ntp
-    - rfxcom
-    - weather
-    - mqtt
+#bindings:
+#    - astro
+#    - ntp
+#    - rfxcom
+#    - weather
+#    - mqtt
+#    - zwave
 
-persistence:
-    - mqtt
+#persistence:
+#    - mqtt
+#    - mysql
 
 graphite_server: "{{vault_graphite_server}}"
 
+nginx_user: "{{vault_nginx_user}}"
+nginx_password: "{{vault_nginx_password}}"
 
+dynv6_name: "{{vault_dynv6_name}}"
+dynv6_device: "{{vault_dynv6_device}}"
+dynv6_token: "{{vault_dynv6_token}}"
 
-
+fqdn: "{{vault_fqdn}}"

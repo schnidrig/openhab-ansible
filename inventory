@@ -2,6 +2,5 @@
 192.168.1.7 ansible_ssh_user=pi
 
 [raspis]
-192.168.1.5 ansible_ssh_user=pi
+#192.168.1.5 ansible_ssh_user=pi
 192.168.1.7 ansible_ssh_user=pi
-

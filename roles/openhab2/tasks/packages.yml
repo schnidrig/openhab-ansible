@@ -13,6 +13,8 @@
      - sysstat
      - nginx
      - python-passlib
+     - jython
+     - jython-doc
   tags:
      - packages
      - openhab2

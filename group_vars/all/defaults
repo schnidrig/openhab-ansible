@@ -19,6 +19,5 @@ ntp:
     #- "2.ch.pool.ntp.org"
     #- "3.ch.pool.ntp.org"
     
-
-letsencrypt_email: "{{vault_letsencrypt_email}}"
+letsencrypt_email: christian.schnidrig@gmail.com
 

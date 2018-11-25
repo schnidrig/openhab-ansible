@@ -12,7 +12,8 @@
 
 - name: install openhab2 repo
   apt_repository:
-    repo: 'deb http://dl.bintray.com/openhab/apt-repo2 testing main'
+    repo: 'deb https://dl.bintray.com/openhab/apt-repo2 stable main'
+    #repo: 'deb http://openhab.jfrog.io/openhab/openhab-linuxpkg unstable main'
     state: present
     update_cache: yes
     filename: openhab2

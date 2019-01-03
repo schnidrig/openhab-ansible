@@ -9,3 +9,13 @@
      mode: "u=rwx,g=r,o=r"
   tags:
     - dynv6
+
+- name: Cron file for dynv6
+  cron:
+    name: dynv6 update
+    user: root
+    job: "/root/dynv6.sh"
+    cron_file: dynv6
+  tags:
+    - dynv6
+

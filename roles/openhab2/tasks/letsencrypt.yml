@@ -22,6 +22,8 @@
     hour: "5"
     day: "11"
     job: '/root/certbot-auto -n certonly --nginx --agree-tos --email {{letsencrypt_email}} -d {{fqdn}}'
+    cron_file: letsencrypt
+    user: root
   tags:
     - letsencrypt
     - letsencrypt_cron

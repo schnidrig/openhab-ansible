@@ -1,5 +1,6 @@
 [Unit]
 Description=MQTTwarn
+After=mosquitto.service
 
 [Service]
 Type=simple

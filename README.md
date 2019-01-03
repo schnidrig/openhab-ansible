@@ -13,18 +13,17 @@ e.g on a mac with sdcard reader that would be:
 
     sudo dd bs=1m if=2016-09-23-raspbian-jessie-lite.img of=/dev/rdiskXYZ
 
-Insert sdcard into rasberry pi and boot.
 
-### Enable sshd
+mount sdcard and create an empty file `ssh` at the top level directory. 
 
-    sudo systemctl enable ssh
+Eject card and then insert sdcard into rasberry pi and boot.
     
 ### Configure fixed ip address
 
 Edit the file `/etc/dhcpcd.conf` and add the following lines (according to your network) and reboot.
 
     interface eth0
-    static ip_address=192.168.1.5/24
+    static ip_address=192.168.1.7/24
     static routers=192.168.1.1
     static domain_name_servers=192.168.1.1
 
@@ -33,6 +32,12 @@ Edit the file `/etc/dhcpcd.conf` and add the following lines (according to your 
 - Change password of user pi.
 - Install ssh public key for user pi
 
+## memory split
+
+    sudo raspi-config
+
+Then from the advanced menu, change the memory split for the GPU to "16"
+restart.
 
 ## Run ansible playbook
 

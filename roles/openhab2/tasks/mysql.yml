@@ -10,6 +10,7 @@
      - python-mysqldb
   tags:
      - mysql
+     - packages
 
 - name: Create openhab database
   mysql_db:

@@ -10,6 +10,7 @@
 - include: nginx.yml
 - include: dynv6.yml
 - include: letsencrypt.yml
+- include: scripts.yml
 
 
 

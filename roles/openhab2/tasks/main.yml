@@ -11,6 +11,9 @@
 - include: dynv6.yml
 - include: letsencrypt.yml
 - include: scripts.yml
+- include: gardena.yml
+  tags:
+    - gardena
 
 
 

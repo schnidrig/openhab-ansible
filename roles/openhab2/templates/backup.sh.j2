@@ -6,7 +6,7 @@ TIMESTAMP=`date +%Y%m%d`;
 tar -C / -czf /tmp/openhab2-backup-$TIMESTAMP.tgz  etc/openhab2 var/lib/openhab2
 
 echo "Now save the file /tmp/openhab2-backup-$TIMESTAMP.tgz"
-echo "  as regular user run: scp /tmp/openhab2-backup-20190422.tgz christian@ds3018:/volume1/backup"
+echo "  as regular user run: scp /tmp/openhab2-backup-$TIMESTAMP.tgz christian@ds3018:/volume1/backup"
 
 # start openhab instance
 #sudo systemctl start openhab2.service

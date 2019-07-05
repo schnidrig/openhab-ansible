@@ -10,8 +10,17 @@
      - ntp
      - tmux
      - python-pip
+     - python3-pip
      - git
      - multitail
+     - python3-requests
+  tags:
+     - packages
+
+- name: install python 3 modules with pip
+  pip:
+    name: websocket-client
+    executable: pip3
   tags:
      - packages
 

@@ -1,0 +1,17 @@
+
+- name: install gardena service file
+  template:
+    src: "gardena.service"
+    dest: "/etc/systemd/system/gardena.service"
+    mode: u=rw,g=rw,o=r
+
+- name: enable gardena service
+  systemd:
+    daemon_reload: yes
+
+- name: Make sure gardena service is running
+  systemd:
+    state: started
+    name: gardena
+
+

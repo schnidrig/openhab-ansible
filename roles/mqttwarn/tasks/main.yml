@@ -1,4 +1,8 @@
 ---
 
 - include: mosquitto.yml
+  tags:
+  - mosquitto
 - include: mqttwarn.yml
+  tags:
+  - mqttwarn

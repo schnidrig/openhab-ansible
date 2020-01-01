@@ -13,8 +13,6 @@
 
 - name: generate locale
   locale_gen: name="{{locale}}" state=present
-  tags:
-    - locale
 
 - name: set environment file
   template:

@@ -1,9 +1,7 @@
 ---
 
-- name: restart ntp
-  service: name=ntp state=restarted
+- name: timedatectl
+  command: timedatectl set-ntp true
 
 - name: update exportfs
   shell: exportfs -rav
-
-

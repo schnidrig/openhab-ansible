@@ -1,10 +1,17 @@
 ---
 
 - include: packages.yml
-- include: ntp.yml
-- include: timezone.yml
-- include: locale.yml
+  tags:
+  - packages
+- include: timedate.yml
+  tags: 
+  - ntp
+# - include: locale.yml
+#   tags:
+#   - locale
 - include: skeleton.yml
+  tags:
+  - skeleton
 
 
 

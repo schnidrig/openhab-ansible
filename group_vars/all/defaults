@@ -7,17 +7,8 @@ apt_config:
   update_cache: yes
   cache_valid_time: 7200
 
-jdk:
-    - oracle-java8-jdk
-    #- oracle-java7-installer
-    #- oracle-java7-set-default
-
 ntp:
     - "ntp.bluewin.ch"
-    #- "0.ch.pool.ntp.org"
-    #- "1.ch.pool.ntp.org"
-    #- "2.ch.pool.ntp.org"
-    #- "3.ch.pool.ntp.org"
     
 letsencrypt_email: christian.schnidrig@gmail.com
 

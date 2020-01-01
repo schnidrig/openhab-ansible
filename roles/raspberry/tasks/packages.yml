@@ -2,25 +2,15 @@
 
 - name: ensure packages are installed
   apt: 
-    pkg: "{{item}}"
-    update_cache: "{{apt_config.update_cache}}"
-    cache_valid_time: "{{apt_config.cache_valid_time}}"
-  with_items:
+    pkg:
      - apt-transport-https
-     - ntp
      - tmux
-     - python-pip
      - python3-pip
      - git
      - multitail
      - python3-requests
-  tags:
-     - packages
+     - python3-websocket
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
 
-- name: install python 3 modules with pip
-  pip:
-    name: websocket-client
-    executable: pip3
-  tags:
-     - packages
 

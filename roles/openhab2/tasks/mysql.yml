@@ -2,15 +2,11 @@
 
 - name: install mysql packages
   apt: 
-    pkg: "{{item}}"
+    pkg:
+    - default-mysql-server
+    - python-mysqldb
     update_cache: "{{apt_config.update_cache}}"
     cache_valid_time: "{{apt_config.cache_valid_time}}"
-  with_items:
-     - mysql-server
-     - python-mysqldb
-  tags:
-     - mysql
-     - packages
 
 - name: Create openhab database
   mysql_db:
@@ -24,7 +20,5 @@
     password: openhab2
     priv: '*.*:ALL'
     state: present
-  tags:
-     - mysql
 
 

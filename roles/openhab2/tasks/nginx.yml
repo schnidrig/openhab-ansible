@@ -8,15 +8,11 @@
      group: root
      mode: "u=rwx,g=r,o=r"
   notify: restart nginx
-  tags:
-    - nginx
 
 - stat: path=/etc/letsencrypt/live/schnidrig.dynv6.net/fullchain.pem
   register: letsencrypt_cert
-  tags:
-    - nginx
   
-- name: overwrite nginx config for letsencrypt initialisation
+- name: overwrite nginx config for letsencrypt initialization
   template:
      src: nginx.init.conf.j2
      dest: "/etc/nginx/sites-available/openhab.conf"
@@ -25,8 +21,6 @@
      mode: "u=rwx,g=r,o=r"
   notify: restart nginx
   when: letsencrypt_cert.stat.exists == false
-  tags:
-    - nginx
 
 - name: create nginx passwd file
   htpasswd:
@@ -37,16 +31,12 @@
      group: root
      mode: "u=rw"
   notify: restart nginx
-  tags:
-    - nginx
 
 - name: remove default site
   file: 
     dest: /etc/nginx/sites-enabled/default
     state: absent
   notify: restart nginx
-  tags:
-    - nginx
 
 - name: enable openhab site
   file: 
@@ -54,30 +44,21 @@
     dest: /etc/nginx/sites-enabled/openhab.conf
     state: link
   notify: restart nginx
-  tags:
-    - nginx
-    
 
 - name: ssl dir
   file: 
     dest: /etc/nginx/ssl
     state: directory
-  tags:
-    - nginx
 
 - name: create self singed certificate
   command: 'openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt -subj "/C=CH/ST=AG/L=Niederlenz/O=none/OU=none/CN=schnidrig.dynv6.net"'
   args: 
     creates: "/etc/nginx/ssl/nginx.crt"
-  tags:
-    - nginx
 
 - name: gen dhparam
   command: 'openssl dhparam -outform PEM -out /etc/nginx/ssl/dhparam2048.pem 2048'
   args: 
     creates: "/etc/nginx/ssl/dhparam2048.pem"
   notify: restart nginx
-  tags: 
-    - nginx
 
 

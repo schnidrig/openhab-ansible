@@ -3,11 +3,12 @@
 - name:
   user: 
     name: openhab
-    groups: "dialout"
+    groups: 
+        - dialout
+        - tty
+        - bluetooth
+        - audio
     append: yes
-  tags:
-    - openhab2
-    - user
 
 - name: "configure systemd"
   systemd:
@@ -15,19 +16,14 @@
     daemon_reload: yes
     enabled: true
     state: started 
-  tags:
-    - openhab2
 
 - name: Download Rollershutters dependencies
   get_url:
     url: "{{ item.src }}"
     dest: "/usr/share/openhab2/runtime/lib/boot/{{ item.name }}"
   loop:
-    #- { name: "jython-standalone-2.7.0.jar", src: 'http://search.maven.org/remotecontent?filepath=org/python/jython-standalone/2.7.0/jython-standalone-2.7.0.jar' }
-    - { name: "snakeyaml-1.18.jar", src: "http://central.maven.org/maven2/org/yaml/snakeyaml/1.18/snakeyaml-1.18.jar" }
-  tags:
-    - openhab2
-    - jython
+    - { name: "jython-standalone-2.7.1.jar", src: 'http://search.maven.org/remotecontent?filepath=org/python/jython-standalone/2.7.1/jython-standalone-2.7.1.jar' }
+    - { name: "snakeyaml-1.25.jar", src: "http://central.maven.org/maven2/org/yaml/snakeyaml/1.25/snakeyaml-1.25.jar" }
 
 - name: cron job
   cron:
@@ -36,11 +32,8 @@
     hour: "5"
     weekday: "0"
     job: 'systemctl restart nginx.service'
-    cron_file: openhab
+    cron_file: openhab2
     user: root
-  tags:
-    - openhab2
-    - openhab_cron
 
 - name: cron job
   cron:
@@ -49,12 +42,8 @@
     hour: "5"
     weekday: "0"
     job: 'touch /etc/openhab2/automation/jsr223/shutters.py'
-    cron_file: openhab
+    cron_file: openhab2
     user: root
-  tags:
-    - openhab2
-    - openhab_cron
-
 
 - name: install python modules for jython
   pip: 
@@ -62,16 +51,12 @@
     virtualenv_command: "/usr/bin/virtualenv"
     virtualenv_python: "/usr/bin/python2.7"
     name: jsonmerge
-  tags:
-    - openhab2
 
-- name: enable virtual env from above in jython
+- name: set EXTRA_JAVA_OPTS
   lineinfile:
     path: "/etc/default/openhab2"
     regexp: '^EXTRA_JAVA_OPTS='
-    line: 'EXTRA_JAVA_OPTS="-Dpython.path=/etc/openhab2/automation/lib/python/lib/python2.7/site-packages/"'
-  tags:
-    - openhab2
+    line: 'EXTRA_JAVA_OPTS="-Dpython.path=/etc/openhab2/automation/lib/python/lib/python2.7/site-packages/ -Dgnu.io.rxtx.SerialPorts=/dev/ttyACM0:/dev/ttyACM1:/dev/ttyUSB0:/dev/ttyUSB1:/dev/ttyS0:/dev/ttyS2:/dev/ttyAMA0"'
 
 
 

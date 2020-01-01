@@ -4,8 +4,6 @@
   file: 
     dest: /root/bin
     state: directory
-  tags:
-    - scripts
 
 - name: create scripts
   template:
@@ -16,5 +14,3 @@
      mode: "u=rwx,g=r,o=r"
   loop:
     - karaf.sh
-  tags:
-    - scripts

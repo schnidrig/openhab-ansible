@@ -1,19 +1,50 @@
 ---
 
 - include: repo.yml
+  tags:
+  - repo
+  - openhab2
 - include: packages.yml
+  tags:
+  - packages
+  - openhab2
 - include: openhab.yml
+  tags:
+  - openhab
+  - openhab2
 #- include: habmin.yml
 - include: nfs.yml
+  tags:
+  - nfs
+  - openhab2
 - include: mysql.yml
+  tags:
+  - mysql
+  - openhab2
 - include: backup.yml
+  tags:
+  - backup
+  - openhab2
 - include: nginx.yml
+  tags:
+  - nginx
+  - openhab2
 - include: dynv6.yml
+  tags:
+  - dynv6
+  - openhab2
 - include: letsencrypt.yml
+  tags:
+  - letsencrypt
+  - openhab2
 - include: scripts.yml
+  tags:
+  - scripts
+  - openhab2
 - include: gardena.yml
   tags:
-    - gardena
+  - gardena
+  - openhab2
 
 
 

@@ -1,6 +1,6 @@
 server {
-    listen                          [::]:80;
-    listen                          [::]:443 ssl;
+    listen                          [::]:80 ipv6only=off;
+    listen                          [::]:443 ipv6only=off ssl;
     server_name                     schnidrig.dynv6.net;
 
     ssl_certificate                 /etc/nginx/ssl/nginx.crt;

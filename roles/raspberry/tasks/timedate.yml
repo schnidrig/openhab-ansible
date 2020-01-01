@@ -1,0 +1,13 @@
+---
+
+- name: update ntp.conf
+  lineinfile:
+    dest: "/etc/systemd/timesyncd.conf"
+    regexp: '^#*\s*NTP='
+    line: "NTP={{ ntp | join(' ') }}"
+  notify: timedatectl
+
+- name: "set Timezone"
+  timezone: 
+    name: "{{ timezone }}"
+  notify: timedatectl

@@ -6,18 +6,26 @@
   apt_key: 
     url: "https://bintray.com/user/downloadSubjectPublicKey?username=openhab"
     state: present
-  tags:
-     - repo
-     - openhab2
 
 - name: install openhab2 repo
   apt_repository:
     repo: 'deb https://dl.bintray.com/openhab/apt-repo2 stable main'
-    #repo: 'deb http://openhab.jfrog.io/openhab/openhab-linuxpkg unstable main'
     state: present
     update_cache: yes
     filename: openhab2
-  tags:
-     - repo
-     - openhab2
 
+# Zulu
+# https://docs.azul.com/zulu/zuludocs/ZuluUserGuide/PrepareZuluPlatform/AttachAPTRepositoryUbuntuOrDebianSys.htm
+
+- name: install zulu key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: B1998361219BD9C9
+    state: present
+
+- name: install zulu repo
+  apt_repository:
+    repo: 'deb http://repos.azulsystems.com/debian stable main'
+    state: present
+    update_cache: yes
+    filename: zulu

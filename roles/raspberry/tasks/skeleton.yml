@@ -3,17 +3,8 @@
 - name: alias
   copy:
      src: alias
-     dest: "/home/pi/.alias"
+     dest: "/home/pi/.bash_aliases"
      owner: pi
      group: pi
      mode: "u=rw,g=r,o=r"
-  tags:
-    - alias
-
-- name: update bashrc
-  lineinfile:
-    dest=/home/pi/.bashrc
-    line="test -s ~/.alias && . ~/.alias"
-  tags:
-    - alias
 

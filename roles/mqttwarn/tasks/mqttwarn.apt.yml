@@ -3,29 +3,25 @@
 - name: install packages
   apt: 
     pkg:
-    - python-paho-mqtt
     - python3-paho-mqtt
     update_cache: "{{apt_config.update_cache}}"
     cache_valid_time: "{{apt_config.cache_valid_time}}"
 
-- git: 
-    repo: "https://github.com/jpmens/mqttwarn.git"
-    dest: "/opt/mqttwarn"
-    version: "0.10.4"
-    #version: "0c030a94a7e3590ea3485f460be555cee027d8a8"
-  tags:
-    - mqttwarn
+- name: install mqttwarn
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  pip:
+    name: mqttwarn
 
 - name: install config file
   template:
     src: mqttwarn.ini
-    dest: "/opt/mqttwarn/mqttwarn.ini"
+    dest: "/etc/mqttwarn.ini"
     owner: root
     group: root
     mode: "u=rw,g=r,o=r"
   notify: restart mqttwarn
   tags:
-    - mqttwarn
     - mqttwarnconfig
 
 - name: create log dir
@@ -34,8 +30,6 @@
     state: directory
     owner: pi
     group: pi
-  tags:
-    - mqttwarn
 
 - name: install service file
   template:
@@ -44,8 +38,7 @@
     owner: root
     group: root
     mode: "u=rw,g=r,o=r"
-  tags:
-    - mqttwarn
+  notify: restart mqttwarn
 
 - name: "configure systemd"
   systemd:
@@ -53,7 +46,5 @@
     daemon_reload: yes
     enabled: true
     state: started 
-  tags:
-    - mqttwarn
 
 

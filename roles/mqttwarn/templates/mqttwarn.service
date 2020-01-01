@@ -6,7 +6,10 @@ After=mosquitto.service
 Type=simple
 User=pi
 Group=pi
+#WorkingDirectory=/home/pi
 WorkingDirectory=/opt/mqttwarn
+#Environment="MQTTWARNINI=/etc/mqttwarn.ini"
+#ExecStart=/usr/local/bin/mqttwarn
 ExecStart=/opt/mqttwarn/mqttwarn.py
 
 [Install]

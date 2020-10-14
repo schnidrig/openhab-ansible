@@ -1,9 +1,33 @@
 
 - name: install gardena service file
   template:
-    src: "gardena.service"
+    src: "gardena/gardena.service"
     dest: "/etc/systemd/system/gardena.service"
     mode: u=rw,g=rw,o=r
+
+- name: install gardena service script
+  template:
+    src: "gardena/gardena_monitor_collector.py"
+    dest: "/etc/openhab2/automation/gardena/gardena_monitor_collector.py"
+    mode: u=rwx,g=rx,o=rx
+    group: root
+    owner: root
+
+- name: install gardena service config
+  template:
+    src: "gardena/gardena.yml"
+    dest: "/etc/openhab2/automation/gardena/gardena.yml"
+    mode: u=rw,g=r,o=r
+    group: openhab
+    owner: openhab
+
+- name: install gardena jsr223 script
+  template:
+    src: "gardena/gardena.py"
+    dest: "/etc/openhab2/automation/jsr223/gardena.py"
+    mode: u=rw,g=r,o=r
+    group: openhab
+    owner: openhab
 
 - name: enable gardena service
   systemd:

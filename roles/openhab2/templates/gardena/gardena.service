@@ -2,7 +2,7 @@
 Description=Service monitoring gardena web service
 
 [Service]
-ExecStart=/etc/openhab2/automation/gardena_monitor_collector.py
+ExecStart=/etc/openhab2/automation/gardena/gardena_monitor_collector.py
 
 [Install]
 WantedBy=multi-user.target

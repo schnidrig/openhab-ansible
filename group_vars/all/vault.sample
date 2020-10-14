@@ -2,17 +2,16 @@
 
 # uncomment the variables and add info
 
-#vault_graphite_server: 
-#vault_openhab_config_repo:
+vault_openhab_config_repo: "ssh://<user>>@<host>:<port>/path/repo.git"
 
-#vault_nginx_user: user
-#vault_nginx_password: passwd
+vault_nginx_user: <user>
+vault_nginx_password: <pass>
 
-#vault_dynv6_name: "myhost.dynv6.net"
-#vault_dynv6_device: ""
-#vault_dynv6_token: 'mytoken'
+vault_dynv6_device: ""
+vault_dynv6_token: '<token>'
 
-#vault_letsencrypt_email: myname@domain.com
-#vault_fqdn: "example.com"
+vault_gardena_user: 'user_name'
+vault_gardena_password: 'password'
+vault_gardena_api_key: '<api-key>'
 
 

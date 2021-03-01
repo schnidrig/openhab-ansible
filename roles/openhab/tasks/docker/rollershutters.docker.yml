@@ -1,0 +1,15 @@
+
+- name: Download Rollershutters dependencies
+  get_url:
+    url: "{{ item.src }}"
+    dest: "/home/pi/openhab/addons/{{ item.name }}"
+    mode: "0644"
+  loop:
+    # https://mvnrepository.com/artifact/org.apache.servicemix.bundles/org.apache.servicemix.bundles.quartz
+    - name: "org.apache.servicemix.bundles.quartz-2.3.2_1.jar"
+      src: "https://repo1.maven.org/maven2/org/apache/servicemix/bundles/org.apache.servicemix.bundles.quartz/2.3.2_1/org.apache.servicemix.bundles.quartz-2.3.2_1.jar"
+    # seems to be included in openhab already
+    #- name: "snakeyaml-1.27.jar"
+    #  src: "https://repo1.maven.org/maven2/org/yaml/snakeyaml/1.27/snakeyaml-1.27.jar"
+  tags:
+    - javalibs

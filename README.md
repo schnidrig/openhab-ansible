@@ -1,3 +1,6 @@
+
+Note: gave up on this since it repeatedly failed to read from the serial ports after a few hours of operation.
+
 # openhab-ansible
 Ansible playbooks to setup openhab on a raspberry pi.
 

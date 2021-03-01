@@ -1,0 +1,67 @@
+
+
+- name: create directories for openhab
+  file: 
+    path: "{{ item }}"
+    owner: pi
+    group: pi
+    mode: '0755'
+    state: directory
+  loop:
+    - "{{ openhab_root_dir }}"
+    - "{{ openhab_root_dir }}/conf"
+    - "{{ openhab_root_dir }}/userdata"
+    - "{{ openhab_root_dir }}/addons"
+    - "{{ openhab_root_dir }}/restore"
+
+
+# https://hub.docker.com/r/openhab/openhab/
+- name: Create openhab container
+  community.docker.docker_container:
+    name: "openhab"
+    image: "openhab/openhab:{{ openhab_version }}"
+    state: "started"
+    container_default_behavior: compatibility
+    command: "bash -c 'if [ -e /restore/restore.zip ]; then echo y |/openhab/runtime/bin/restore /restore/restore.zip ; fi; exec tini -s ./start.sh server'"
+    #detach: "yes"
+    #interactive: "yes"
+    #tty: "yes"
+    #networks:
+    #  - name: "host"
+    ports:
+      - 8080:8080
+      - 8443:8443
+    env:
+      "EXTRA_JAVA_OPTS": "-Duser.timezone={{ timezone }}"
+      "USER_ID": "{{ openhab_userid }}"
+      "GROUP_ID": "{{ openhab_groupid }}"
+    restart_policy: "unless-stopped"
+    privileged: yes
+    # devices:
+    #   - "/dev/ttyUSB0:/dev/ttyUSB0"
+    #   - "/dev/ttyAMA0:/dev/ttyAMA0"
+    mounts:
+      - target: "/openhab/conf"
+        source: "{{ openhab_root_dir }}/conf"
+        type: bind
+      - target: "/openhab/userdata"
+        source: "{{ openhab_root_dir }}/userdata"
+        type: bind
+      - target: "/openhab/addons"
+        source: "{{ openhab_root_dir }}/addons"
+        type: bind
+      - target: "/restore"
+        source: "{{ openhab_root_dir }}/restore"
+        type: bind
+      - target: /etc/localtime
+        source: /etc/localtime
+        type: bind
+        read_only: yes
+      - target: /etc/timezone
+        source: /etc/timezone
+        type: bind
+        read_only: yes
+      - target: /dev
+        source: /dev
+        type: bind
+  

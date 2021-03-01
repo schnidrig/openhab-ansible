@@ -1,0 +1,17 @@
+---
+
+- name: create scripts dir
+  file: 
+    dest: "/home/pi/bin"
+    state: directory
+
+- name: create scripts
+  template:
+     src: "{{ item }}.sh"
+     dest: "/home/pi/bin/{{ item }}"
+     owner: root
+     group: root
+     mode: "u=rwx,g=xr,o=rx"
+  loop:
+    - client
+    - backup

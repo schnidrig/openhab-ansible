@@ -5,3 +5,8 @@
 
 - name: update exportfs
   shell: exportfs -rav
+
+- name: restart collectd
+  ansible.builtin.service:
+    name: collectd
+    state: restarted

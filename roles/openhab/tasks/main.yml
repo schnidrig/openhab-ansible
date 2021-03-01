@@ -1,10 +1,37 @@
 ---
 
-- include: repo.yml
-- include: packages.yml
+- include: jdk.yml
+  tags:
+  - jdk
+  - openhab_all
 - include: openhab.yml
-- include: habmin.yml
-- include: nfs.yml
-- include: mysql.yml
+  tags:
+  - openhab
+  - openhab_all
+- include: rollershutters.yml
+  tags:
+  - rollershutters
+  - openhab_all
+- include: nginx.yml
+  tags:
+  - nginx
+  - openhab_all
+- include: dynv6.yml
+  tags:
+  - dynv6
+  - openhab_all
+- include: letsencrypt.yml
+  tags:
+  - letsencrypt
+  - openhab_all
+- include: scripts.yml
+  tags:
+  - scripts
+  - openhab_all
+# - include: gardena.yml
+#   tags:
+#   - gardena
+#   - openhab_all
+
 
 

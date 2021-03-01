@@ -1,0 +1,5 @@
+alias ls='/bin/ls -aF --color=auto'
+#alias openhablog='tail -n 100 -f /var/log/openhab2/openhab.log -f /var/log/openhab2/events.log'
+#alias openhablog2='multitail /var/log/openhab2/openhab.log /var/log/openhab2/events.log'
+#alias openhablog3='multitail /var/log/openhab2/openhab.log -ci yellow -I /var/log/openhab2/events.log'
+#alias karafshell="sudo su -s /bin/bash -c '/usr/share/openhab2/runtime/bin/client' openhab"

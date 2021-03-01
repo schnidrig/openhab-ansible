@@ -2,15 +2,15 @@
 
 - name: create scripts dir
   file: 
-    dest: /root/bin
+    dest: "/home/pi/bin"
     state: directory
 
 - name: create scripts
   template:
-     src: "{{ item }}"
-     dest: "/root/bin/{{ item }}"
+     src: "{{ item }}.sh"
+     dest: "/home/pi/bin/{{ item }}"
      owner: root
      group: root
-     mode: "u=rwx,g=r,o=r"
+     mode: "u=rwx,g=xr,o=rx"
   loop:
-    - karaf.sh
+    - backup

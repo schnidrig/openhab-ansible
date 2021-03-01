@@ -4,7 +4,7 @@
   apt: 
     pkg:
     - certbot
-    - python-certbot-nginx
+    #- python-certbot-nginx
     - python3-certbot-nginx
     update_cache: "{{apt_config.update_cache}}"
     cache_valid_time: "{{apt_config.cache_valid_time}}"

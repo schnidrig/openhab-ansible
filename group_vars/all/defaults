@@ -1,5 +1,13 @@
 ---
 
+jdk: "zulu11.45.27-ca-jdk11.0.10-linux_aarch32hf"
+jdk_url: "https://cdn.azul.com/zulu-embedded/bin/{{ jdk }}.tar.gz"
+
+openhab_version: "3.0.1"
+openhab_userid: "1000"
+openhab_groupid: "1000"
+openhab_root_dir: "/home/pi/openhab"
+
 timezone: "Europe/Zurich"
 locale: "en_US.UTF-8"
 
@@ -8,7 +16,7 @@ apt_config:
   cache_valid_time: 7200
 
 ntp:
-    - "ntp.bluewin.ch"
+    - "ch.pool.ntp.org"
     
 letsencrypt_email: christian.schnidrig@gmail.com
 

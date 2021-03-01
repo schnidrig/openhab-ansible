@@ -1,24 +1,14 @@
 # openhab-ansible
-Ansible playbooks to setup openhab on a raspberry pi. It'll install mosquitto and mqttwarn as well. Mqttwarn is configured to send data to graphite.
+Ansible playbooks to setup openhab on a raspberry pi.
 
 ## Prepare Raspberry Pi
-
 ### Install raspian
+Using the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) install the latest (buster) version.
 
-Download it from [https://www.raspberrypi.org/downloads/raspbian/](https://www.raspberrypi.org/downloads/raspbian/)
-
-Unzip and copy it onto an sdcard
-
-e.g on a mac with sdcard reader that would be:
-
-    sudo dd bs=1m if=2016-09-23-raspbian-jessie-lite.img of=/dev/rdiskXYZ
-
-
-mount sdcard and create an empty file `ssh` at the top level directory. 
+Mount sd-card and create an empty file `ssh` at the top level directory. 
 
 Eject card and then insert sdcard into rasberry pi and boot.
-    
-### Configure fixed ip address
+### Optional: Configure fixed ip address
 
 Edit the file `/etc/dhcpcd.conf` and add the following lines (according to your network) and reboot.
 
@@ -29,19 +19,25 @@ Edit the file `/etc/dhcpcd.conf` and add the following lines (according to your 
 
 ### User setup
 
-- Change password of user pi.
-- Install ssh public key for user pi
+- Install /home/pi/.ssh/authorized_keys for user pi
+- delete password for user pi: `passwd --delete pi`
 
-## memory split
+### Dist Upgrade
 
-    sudo raspi-config
+Upgrade all packages to newest version: 
 
-Then from the advanced menu, change the memory split for the GPU to "16"
-restart.
+    apt update
+    apt dist-upgrade -y
 
 ## Run ansible playbook
 
+first install some galaxy roles:
+
+    ansible-galaxy collection install community.general
+    ansible-galaxy collection install community.docker
+
 Edit group_vars/all/vault.
+Edit inventory.
 Check/change other values in group_vars
 
 ansible-playbook -i inventory raspi.yml
@@ -50,8 +46,20 @@ ansible-playbook -i inventory raspi.yml
 
 https://github.com/openhab/openhab/wiki/Hardware-FAQ
 
-# install docker
-https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
-curl -sSL https://get.docker.com | sh
+## Logging Config
 
+add the following to /home/pi/userdata/etc/log4j2.xml
+
+                <!-- jython file appender -->
+                <RollingRandomAccessFile fileName="${sys:openhab.logdir}/jython.log" filePattern="${sys:openhab.logdir}/jython.log.%i" name="JYTHON">
+                        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5.5p] [%-36.36c] - %m%n"/>
+                        <Policies>
+                                <OnStartupTriggeringPolicy/>
+                                <SizeBasedTriggeringPolicy size="8 MB"/>
+                        </Policies>
+                </RollingRandomAccessFile>
+
+                <Logger additivity="false" level="INFO" name="jython">
+                        <AppenderRef ref="JYTHON"/>
+                </Logger>
 

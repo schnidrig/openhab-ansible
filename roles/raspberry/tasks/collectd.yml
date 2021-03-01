@@ -1,0 +1,17 @@
+- name: ensure packages are installed
+  apt: 
+    pkg:
+     - collectd
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
+
+- name: collectd config
+  template:
+    src: collectd.conf
+    dest: /etc/collectd/collectd.conf
+  notify: restart collectd
+
+- name: remove local rrd files
+  file:
+    dest: /var/lib/collectd/rrd
+    state: absent

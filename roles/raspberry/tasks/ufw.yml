@@ -1,0 +1,37 @@
+---
+
+- name: "Allow SSH"
+  community.general.ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: "Allow HTTP for letsencrypt"
+  community.general.ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+
+- name: "Allow HTTPS"
+  community.general.ufw:
+    rule: allow
+    port: "443"
+    proto: tcp
+
+- name: "Allow all private IPv4 networks"
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  with_items:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+
+- name: "Set logging" 
+  community.general.ufw:
+    logging: "on"
+
+- name: "Enable UFW"
+  community.general.ufw:
+    state: enabled
+    policy: deny
+

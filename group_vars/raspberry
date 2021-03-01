@@ -1,16 +1,6 @@
 ---
 
-#bindings:
-#    - astro
-#    - ntp
-#    - rfxcom
-#    - weather
-#    - mqtt
-#    - zwave
-
-#persistence:
-#    - mqtt
-#    - mysql
+user_name: pi
 
 #graphite_server: 'grafana.dynv6.net'
 graphite_server: "192.168.1.96"
@@ -19,9 +9,7 @@ nginx_user: "{{ vault_nginx_user }}"
 nginx_password: "{{ vault_nginx_password }}"
 
 dynv6_name: "schnidrig.dynv6.net"
-#dynv6_name: "raspi4.dynv6.net"
 dynv6_device: "{{ vault_dynv6_device }}"
 dynv6_token: "{{ vault_dynv6_token }}"
 
 fqdn: "schnidrig.dynv6.net"
-#fqdn: "raspi4.dynv6.net"

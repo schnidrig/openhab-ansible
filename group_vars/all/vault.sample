@@ -2,8 +2,6 @@
 
 # uncomment the variables and add info
 
-vault_openhab_config_repo: "ssh://<user>>@<host>:<port>/path/repo.git"
-
 vault_nginx_user: <user>
 vault_nginx_password: <pass>
 

@@ -3,16 +3,20 @@
 - include: packages.yml
   tags:
   - packages
-- include: timedate.yml
-  tags: 
-  - ntp
-# - include: locale.yml
-#   tags:
-#   - locale
+
 - include: skeleton.yml
   tags:
   - skeleton
 
+- include: ufw.yml
+  tags:
+  - ufw
 
+- include: timedate.yml
+  tags:
+  - timedate
 
+- include: collectd.yml
+  tags:
+  - collectd
 

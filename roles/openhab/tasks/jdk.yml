@@ -1,0 +1,22 @@
+
+- name: create directories
+  file: 
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+  loop:
+    - "/opt/jdk"
+
+- name: Get JDK
+  ansible.builtin.unarchive:
+    src: "{{ jdk_url }}"
+    dest: "/opt/jdk"
+    remote_src: yes
+    creates: "/opt/jdk/{{ jdk }}"
+
+- name: Set alternatives
+  shell: "update-alternatives --install /usr/bin/java java /opt/jdk/{{ jdk }}/bin/java 1"
+- name: Set alternatives
+  shell: "update-alternatives --install /usr/bin/javac javac /opt/jdk/{{ jdk }}/bin/javac 1"

@@ -1,20 +1,61 @@
----
 
-- name:
-  user: 
-    name: openhab
-    groups: "dialout"
-    append: yes
-  tags:
-    - openhab
-    - user
+- name: Add Openhab Repo Key
+  ansible.builtin.apt_key:
+    url: https://bintray.com/user/downloadSubjectPublicKey?username=openhab
+    state: present
 
-- name: "configure systemd"
-  systemd:
-    name: openhab
+- name: Add Openhab Repo
+  ansible.builtin.apt_repository:
+    repo: "deb https://dl.bintray.com/openhab/apt-repo2 stable main"
+    state: present
+    filename: openhab
+
+- name: ensure packages are installed
+  apt: 
+    pkg:
+     - openhab
+    update_cache: "{{apt_config.update_cache}}"
+    cache_valid_time: "{{apt_config.cache_valid_time}}"
+
+
+- name: Create a symbolic links
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: pi
+    group: pi
+    state: link
+  loop:
+    - {"src": "/usr/share/openhab", "dest": "/home/pi/openhab_bin"}
+    - {"src": "/usr/share/openhab/addons", "dest": "/home/pi/addons"}
+    - {"src": "/etc/openhab", "dest": "/home/pi/conf"}
+    - {"src": "/var/log/openhab", "dest": "/home/pi/logs"}
+    - {"src": "/var/lib/openhab", "dest": "/home/pi/userdata"}
+    - {"src": "/var/lib/openhab/backups", "dest": "/home/pi/backups"}
+    - {"src": "/usr/share/openhab/runtime/bin/client", "dest": "/home/pi/bin/client"}
+    - {"src": "/usr/share/openhab/runtime/bin/restore", "dest": "/home/pi/bin/restore"}
+
+- name: add directories
+  file: 
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: '0755'
+    state: directory
+  loop:
+    - "/etc/systemd/system/openhab.service.d"
+
+# original file from '/lib/systemd/system/openhab.service'
+- name: openhab service
+  template:
+    src: openhab.service
+    dest: /etc/systemd/system/openhab.service.d/override.conf
+
+- name: force systemd to reread configs
+  ansible.builtin.systemd:
     daemon_reload: yes
-    enabled: true
-    state: started 
-  tags:
-    - openhab
 
+- name: Enable openhab service
+  ansible.builtin.service:
+    name: openhab
+    enabled: yes

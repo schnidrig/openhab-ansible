@@ -1,10 +1,19 @@
 ---
 
 - name: alias
-  copy:
+  template:
      src: alias
-     dest: "/home/pi/.bash_aliases"
-     owner: pi
-     group: pi
+     dest: "{{ item.homedir }}/.bash_aliases"
+     owner: "{{ item.name }}"
      mode: "u=rw,g=r,o=r"
+  loop:
+    - {name: "{{ user_name }}", homedir: "/home/{{ user_name }}" }
+    - {name: "root", homedir: "/root" }
 
+- name: root_bashrc
+  template:
+     src: root.bashrc
+     dest: "/root/.bashrc"
+     owner: root
+     group: root
+     mode: "u=rw,g=r,o=r"

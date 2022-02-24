@@ -1,12 +1,12 @@
 
 - name: Add Openhab Repo Key
   ansible.builtin.apt_key:
-    url: https://bintray.com/user/downloadSubjectPublicKey?username=openhab
+    url: https://openhab.jfrog.io/artifactory/api/gpg/key/public
     state: present
 
 - name: Add Openhab Repo
   ansible.builtin.apt_repository:
-    repo: "deb https://dl.bintray.com/openhab/apt-repo2 stable main"
+    repo: "deb https://openhab.jfrog.io/artifactory/openhab-linuxpkg stable main"
     state: present
     filename: openhab
 
@@ -14,6 +14,7 @@
   apt: 
     pkg:
      - openhab
+     #- openhab-addons
     update_cache: "{{apt_config.update_cache}}"
     cache_valid_time: "{{apt_config.cache_valid_time}}"
 
@@ -31,9 +32,9 @@
     - {"src": "/etc/openhab", "dest": "/home/pi/conf"}
     - {"src": "/var/log/openhab", "dest": "/home/pi/logs"}
     - {"src": "/var/lib/openhab", "dest": "/home/pi/userdata"}
-    - {"src": "/var/lib/openhab/backups", "dest": "/home/pi/backups"}
-    - {"src": "/usr/share/openhab/runtime/bin/client", "dest": "/home/pi/bin/client"}
-    - {"src": "/usr/share/openhab/runtime/bin/restore", "dest": "/home/pi/bin/restore"}
+    #- {"src": "/var/lib/openhab/backups", "dest": "/home/pi/backups"}
+    #- {"src": "/usr/share/openhab/runtime/bin/client", "dest": "/home/pi/bin/client"}
+    #- {"src": "/usr/share/openhab/runtime/bin/restore", "dest": "/home/pi/bin/restore"}
 
 - name: add directories
   file: 

@@ -1,0 +1,38 @@
+---
+
+- name: cron job
+  cron:
+    name: "restart openhab"
+    minute: "10"
+    hour: "5"
+    weekday: "0"
+    job: 'systemctl restart nginx.service'
+    cron_file: openhab2
+    user: root
+
+- name: cron job
+  cron:
+    name: "touch shutters"
+    minute: "20"
+    hour: "5"
+    weekday: "0"
+    job: 'touch /etc/openhab2/automation/jsr223/shutters.py'
+    cron_file: openhab2
+    user: root
+
+# gardena needs jsonmerge
+- name: install python modules for jython
+  pip: 
+    virtualenv: "/etc/openhab2/automation/lib/python"
+    virtualenv_command: "/usr/bin/virtualenv"
+    virtualenv_python: "/usr/bin/python2.7"
+    name: jsonmerge
+
+- name: set EXTRA_JAVA_OPTS
+  lineinfile:
+    path: "/etc/default/openhab2"
+    regexp: '^EXTRA_JAVA_OPTS='
+    line: 'EXTRA_JAVA_OPTS="-Dpython.path=/etc/openhab2/automation/lib/python/lib/python2.7/site-packages/ -Dgnu.io.rxtx.SerialPorts=/dev/ttyACM0:/dev/ttyACM1:/dev/ttyUSB0:/dev/ttyUSB1:/dev/ttyS0:/dev/ttyS2:/dev/ttyAMA0"'
+
+
+

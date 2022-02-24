@@ -40,7 +40,7 @@ Edit group_vars/all/vault.
 Edit inventory.
 Check/change other values in group_vars
 
-ansible-playbook -i inventory raspi.yml
+ansible-playbook -i inventory openhab.yml
 
 ## performance tweaks
 
@@ -63,3 +63,14 @@ add the following to /home/pi/userdata/etc/log4j2.xml
                         <AppenderRef ref="JYTHON"/>
                 </Logger>
 
+
+# Optional:
+
+Add the following line to /etc/fstab
+
+	tmpfs /var/log/openhab tmpfs rw,size=1g,uid=1000,gid=1000,mode=0755 0 0
+
+
+# Restore backed up config
+
+Use script: `/usr/share/openhab/runtime/bin/restore`

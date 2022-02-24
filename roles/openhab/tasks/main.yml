@@ -16,14 +16,14 @@
   tags:
   - nginx
   - openhab_all
-- include: dynv6.yml
-  tags:
-  - dynv6
-  - openhab_all
-- include: letsencrypt.yml
-  tags:
-  - letsencrypt
-  - openhab_all
+# - include: dynv6.yml
+#   tags:
+#   - dynv6
+#   - openhab_all
+# - include: letsencrypt.yml
+#   tags:
+#   - letsencrypt
+#   - openhab_all
 - include: scripts.yml
   tags:
   - scripts

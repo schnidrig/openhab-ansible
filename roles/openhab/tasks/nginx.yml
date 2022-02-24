@@ -17,7 +17,7 @@
      mode: "u=rwx,g=r,o=r"
   notify: restart nginx
 
-- stat: path=/etc/letsencrypt/live/schnidrig.dynv6.net/fullchain.pem
+- stat: path=/etc/letsencrypt/live/{{fqdn}}/fullchain.pem
   register: letsencrypt_cert
   
 - name: overwrite nginx config for letsencrypt initialization

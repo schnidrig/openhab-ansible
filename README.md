@@ -66,9 +66,10 @@ add the following to /home/pi/userdata/etc/log4j2.xml
 
 # Optional:
 
-Add the following line to /etc/fstab
+Add the following lines to /etc/fstab
 
 	tmpfs /var/log/openhab tmpfs rw,size=1g,uid=1000,gid=1000,mode=0755 0 0
+	tmpfs /home/pi/psa/log tmpfs rw,size=1g,uid=1000,gid=1000,mode=0755 0 0
 
 
 # Restore backed up config

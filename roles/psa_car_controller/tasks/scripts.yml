@@ -13,4 +13,4 @@
      group: root
      mode: "u=rwx,g=xr,o=rx"
   loop:
-    - backup-openhab
+    - backup-psa

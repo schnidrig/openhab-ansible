@@ -1,0 +1,12 @@
+---
+
+- include: psacc.yml
+  tags:
+  - psacc
+  - openhab_all
+
+- include: scripts.yml
+  tags:
+  - psacc
+  - openhab_all
+

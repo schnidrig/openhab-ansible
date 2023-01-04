@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+  psacc:
+    image: flobz/psa_car_controller:v3.0.7
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./config:/config
+      - ./log:/var/log
+      - ./mylogger.py:/usr/local/lib/python3.9/dist-packages/psa_car_controller/common/mylogger.py
+    command: psa-car-controller -l 0.0.0.0 -b / -c -r --web-conf -R 10
+

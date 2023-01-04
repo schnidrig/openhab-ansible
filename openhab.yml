@@ -6,5 +6,6 @@
   roles:
     - raspberry
     - openhab
+    - psa_car_controller
 
 
